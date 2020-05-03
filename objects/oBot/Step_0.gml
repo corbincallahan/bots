@@ -1,3 +1,9 @@
+#region // Skip if should die
+if(shouldDie) {
+	return;
+}
+#endregion
+
 updateRegion(self); // Should this be done at the end? Does it really matter?
 
 #region // Roaming/searching
