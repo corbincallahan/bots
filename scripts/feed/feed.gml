@@ -2,6 +2,6 @@ eating = argument0;
 eaten = argument1;
 
 // Experimenting
-updateSpeed(eating, 2);
+updateSpeed(eating, eaten.speedLevel + 2); // Temp
 
-die(eaten);
+eaten.shouldDie = true;

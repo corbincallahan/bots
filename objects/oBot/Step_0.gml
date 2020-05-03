@@ -2,6 +2,9 @@ updateRegion(self); // Should this be done at the end? Does it really matter?
 
 #region // Roaming/searching
 if(state == 0) {
+	// Set velocity
+	velocity = walkingSpeed
+	
 	// Meander
 	if(random(1) < .01) { // Change turning
 		meandering = irandom(2);
@@ -18,20 +21,27 @@ if(state == 0) {
 
 #region // Chasing
 else if(state == 1) {
-	// Enable sprint here or on finding target?
+	// Check if target is still alive
+	if(instance_exists(target) && !target.shouldDie) {
+		// Enable sprint here or on finding target?
+		velocity = walkingSpeed;
 	
-	// Turn toward target
-	var dirToTarget = point_direction(x, y, target.x, target.y);
-	if(abs(angle_difference(dirToTarget, facing)) < turnRate) {
-		facing = dirToTarget;
+		// Turn toward target
+		var dirToTarget = point_direction(x, y, target.x, target.y);
+		if(abs(angle_difference(dirToTarget, facing)) < turnRate) {
+			facing = dirToTarget;
+		}
+		else {
+			facing += turnRate * sign(dirToTarget);
+		}
+	
+		// Attack if in range
+		if(point_distance(x, y, target.x, target.y) <= attackRange) {
+			attack(self, target);
+		}
 	}
 	else {
-		facing += turnRate * sign(dirToTarget);
-	}
-	
-	// Attack if in range
-	if(point_distance(x, y, target.x, target.y) <= attackRange) {
-		attack(self, target);
+		state = 0;
 	}
 }
 #endregion

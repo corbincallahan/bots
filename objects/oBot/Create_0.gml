@@ -40,6 +40,7 @@ giveUpRange = 500; // Will stop chasing if target is more than this far away
 
 maxHp = 1;
 hp = maxHp;
+shouldDie = false;
 
 attackDamage = 1;
 attackSpeed = 2;

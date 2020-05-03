@@ -1,0 +1,3 @@
+if(shouldDie) {
+	die(self);
+}
