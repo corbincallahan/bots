@@ -8,6 +8,8 @@ updateRegion(self); // Should this be done at the end? Does it really matter?
 
 #region // Roaming/searching
 if(state == 0) {
+	image_blend = make_color_hsv(128, 255, 255);
+	
 	// Set velocity
 	velocity = walkingSpeed
 	
@@ -27,18 +29,21 @@ if(state == 0) {
 
 #region // Chasing
 else if(state == 1) {
+	image_blend = make_color_hsv(0, 255, 255);
+	
 	// Check if target is still alive
-	if(instance_exists(target) && !target.shouldDie) {
+	if(instance_exists(target) && !target.shouldDie && point_distance(x, y, target.x, target.y) < giveUpRange) {
 		// Enable sprint here or on finding target?
 		velocity = walkingSpeed;
 	
 		// Turn toward target
 		var dirToTarget = point_direction(x, y, target.x, target.y);
-		if(abs(angle_difference(dirToTarget, facing)) < turnRate) {
+		var theta = angle_difference(dirToTarget, facing);
+		if(abs(theta) < turnRate) {
 			facing = dirToTarget;
 		}
 		else {
-			facing += turnRate * sign(dirToTarget);
+			facing += turnRate * sign(theta);
 		}
 	
 		// Attack if in range
@@ -54,6 +59,8 @@ else if(state == 1) {
 
 #region // Attacking
 else if(state == 2) {
+	image_blend = make_color_hsv(0, 128, 255);
+	
 	--attackTimer;
 	if(attackTimer <= 0) {
 		state = 1;

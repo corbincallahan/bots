@@ -36,7 +36,7 @@ velocity = walkingSpeed;
 sprintSpeed = 2;
 attackingSpeed = .3;
 turnRate = 3;
-giveUpRange = 500; // Will stop chasing if target is more than this far away
+giveUpRange = 200; // Will stop chasing if target is more than this far away
 
 maxHp = 1;
 hp = maxHp;
@@ -45,5 +45,3 @@ shouldDie = false;
 attackDamage = 1;
 attackSpeed = 2;
 attackRange = 16;
-
-image_blend = make_color_hsv(128, 255, 255);

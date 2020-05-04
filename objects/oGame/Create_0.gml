@@ -15,7 +15,7 @@ for(var i = numRegions - 1; i >= 0; --i) {
 #endregion
 
 #region // Make bots
-for(var i = 0; i < 100; ++i) {
+for(var i = 0; i < 20; ++i) {
 	randX = random_range(0, room_width);
 	randY = random_range(0, room_height);
 	with(instance_create_layer(randX, randY, "Instances", oBot)) {
